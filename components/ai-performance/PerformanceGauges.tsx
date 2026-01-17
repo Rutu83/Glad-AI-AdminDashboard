@@ -1,3 +1,5 @@
+import Icon from '../Icon'
+
 export default function PerformanceGauges() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -6,7 +8,7 @@ export default function PerformanceGauges() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
         <div className="flex flex-col gap-2 z-10">
           <p className="text-text-secondary font-medium flex items-center gap-2">
-            <span className="material-symbols-outlined text-xl">graphic_eq</span>
+            <Icon name="graphic_eq" className="text-xl" />
             Avg Whisper Latency
           </p>
           <p className="text-4xl font-bold text-white tracking-tight">1.2s</p>
@@ -35,7 +37,7 @@ export default function PerformanceGauges() {
             />
           </svg>
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="material-symbols-outlined text-accent-green text-3xl drop-shadow-[0_0_8px_rgba(11,218,115,0.5)]">check_circle</span>
+            <Icon name="check_circle" className="text-accent-green text-3xl drop-shadow-[0_0_8px_rgba(11,218,115,0.5)]" />
           </div>
         </div>
       </div>
@@ -45,7 +47,7 @@ export default function PerformanceGauges() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
         <div className="flex flex-col gap-2 z-10">
           <p className="text-text-secondary font-medium flex items-center gap-2">
-            <span className="material-symbols-outlined text-xl">psychology</span>
+            <Icon name="psychology" className="text-xl" />
             Avg GPT Response Time
           </p>
           <p className="text-4xl font-bold text-white tracking-tight">0.8s</p>
@@ -74,7 +76,7 @@ export default function PerformanceGauges() {
             />
           </svg>
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="material-symbols-outlined text-primary text-3xl drop-shadow-[0_0_8px_rgba(127,13,242,0.6)]">bolt</span>
+            <Icon name="bolt" className="text-primary text-3xl drop-shadow-[0_0_8px_rgba(127,13,242,0.6)]" />
           </div>
         </div>
       </div>

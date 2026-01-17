@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Icon from '../Icon'
 
 interface User {
   id: string
@@ -84,7 +85,7 @@ function getPlanBadge(plan: User['plan']) {
 
   return (
     <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border ${styles[plan]}`}>
-      {icons[plan] && <span className="material-symbols-outlined text-[14px]">{icons[plan]}</span>}
+      {icons[plan] && <Icon name={icons[plan]} size={14} />}
       {labels[plan]}
     </span>
   )
@@ -201,7 +202,7 @@ export default function UserTable() {
                   <td className="px-6 py-4 text-gray-300">{user.joinedDate}</td>
                   <td className="px-6 py-4 text-right">
                     <button className="text-gray-400 hover:text-white p-2 hover:bg-white/10 rounded-lg transition-colors">
-                      <span className="material-symbols-outlined">more_vert</span>
+                      <Icon name="more_vert" />
                     </button>
                   </td>
                 </tr>
@@ -218,7 +219,7 @@ export default function UserTable() {
         </p>
         <div className="flex items-center gap-2">
           <button className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 disabled:opacity-50 disabled:cursor-not-allowed">
-            <span className="material-symbols-outlined text-lg">chevron_left</span>
+            <Icon name="chevron_left" size={18} />
           </button>
           <button className="size-8 rounded-lg bg-primary text-white text-sm font-medium shadow-lg shadow-primary/20">1</button>
           <button className="size-8 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white text-sm font-medium transition-colors">2</button>
@@ -226,7 +227,7 @@ export default function UserTable() {
           <span className="text-gray-500">...</span>
           <button className="size-8 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white text-sm font-medium transition-colors">12</button>
           <button className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5">
-            <span className="material-symbols-outlined text-lg">chevron_right</span>
+            <Icon name="chevron_right" size={18} />
           </button>
         </div>
       </div>

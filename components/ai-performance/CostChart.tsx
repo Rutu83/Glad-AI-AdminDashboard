@@ -1,3 +1,5 @@
+import Icon from '../Icon'
+
 export default function CostChart() {
   return (
     <div className="rounded-2xl border border-border-dark bg-card-dark p-6 shadow-xl">
@@ -17,7 +19,7 @@ export default function CostChart() {
           </div>
           <button className="ml-2 flex items-center gap-2 rounded-lg bg-[#302839] px-3 py-1.5 text-sm font-medium text-white hover:bg-border-dark transition-colors">
             <span>Last 30 Days</span>
-            <span className="material-symbols-outlined text-sm">expand_more</span>
+            <Icon name="expand_more" className="text-sm" />
           </button>
         </div>
       </div>

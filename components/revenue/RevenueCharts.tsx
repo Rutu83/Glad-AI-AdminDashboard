@@ -1,3 +1,5 @@
+import Icon from '../Icon'
+
 export default function RevenueCharts() {
   const barHeights = [40, 55, 45, 70, 85, 60] // Percentages for bar heights
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
@@ -12,7 +14,7 @@ export default function RevenueCharts() {
             <p className="text-text-secondary text-sm">Monthly vs Yearly Subscriptions</p>
           </div>
           <button className="text-primary hover:text-white transition-colors">
-            <span className="material-symbols-outlined">more_horiz</span>
+            <Icon name="more_horiz" />
           </button>
         </div>
 
@@ -59,7 +61,7 @@ export default function RevenueCharts() {
             <div className="flex justify-between items-end">
               <div className="flex items-center gap-2">
                 <div className="p-1.5 rounded bg-blue-500/20 text-blue-400">
-                  <span className="material-symbols-outlined text-sm">qr_code_2</span>
+                  <Icon name="qr_code_2" className="text-sm" />
                 </div>
                 <span className="text-white font-medium text-sm">UPI</span>
               </div>
@@ -75,7 +77,7 @@ export default function RevenueCharts() {
             <div className="flex justify-between items-end">
               <div className="flex items-center gap-2">
                 <div className="p-1.5 rounded bg-primary/20 text-primary">
-                  <span className="material-symbols-outlined text-sm">credit_card</span>
+                  <Icon name="credit_card" className="text-sm" />
                 </div>
                 <span className="text-white font-medium text-sm">Card</span>
               </div>
@@ -91,7 +93,7 @@ export default function RevenueCharts() {
             <div className="flex justify-between items-end">
               <div className="flex items-center gap-2">
                 <div className="p-1.5 rounded bg-purple-400/20 text-purple-400">
-                  <span className="material-symbols-outlined text-sm">account_balance</span>
+                  <Icon name="account_balance" className="text-sm" />
                 </div>
                 <span className="text-white font-medium text-sm">Net Banking</span>
               </div>

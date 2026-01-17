@@ -2,6 +2,7 @@ import Sidebar from '@/components/Sidebar'
 import Header from '@/components/Header'
 import UserFilters from '@/components/users/UserFilters'
 import UserTable from '@/components/users/UserTable'
+import Icon from '@/components/Icon'
 
 export default function UsersPage() {
   return (
@@ -18,7 +19,7 @@ export default function UsersPage() {
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2 text-sm text-gray-400 mb-1">
                 <span>Admin</span>
-                <span className="material-symbols-outlined text-[16px]">chevron_right</span>
+                <Icon name="chevron_right" className="text-[16px]" />
                 <span className="text-primary">Users</span>
               </div>
               <h2 className="text-3xl font-bold text-white tracking-tight">User Management</h2>

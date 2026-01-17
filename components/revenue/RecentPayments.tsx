@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Icon from '../Icon'
 
 interface Payment {
   id: string
@@ -141,7 +142,7 @@ export default function RecentPayments() {
                   </td>
                   <td className="p-4">
                     <div className="flex items-center gap-2 text-text-secondary text-sm">
-                      <span className="material-symbols-outlined text-base">{payment.methodIcon}</span>
+                      <Icon name={payment.methodIcon} className="text-base" />
                       {payment.method}
                     </div>
                   </td>

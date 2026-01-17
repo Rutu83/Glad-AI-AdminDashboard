@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Icon from '../Icon'
 
 export default function TransactionHeader() {
   const [isRealTime, setIsRealTime] = useState(true)
@@ -25,13 +26,13 @@ export default function TransactionHeader() {
         <div className="flex items-center gap-4 bg-card-dark border border-border-dark p-2 rounded-xl shadow-lg">
           {/* Date Range */}
           <div className="flex items-center border-r border-border-dark pr-4 pl-2 h-10">
-            <span className="material-symbols-outlined text-text-secondary text-[20px] mr-2">calendar_today</span>
+            <Icon name="calendar_today" className="text-text-secondary mr-2" size={20} />
             <input 
               className="bg-transparent border-none text-sm text-white placeholder-text-secondary focus:ring-0 w-48 font-medium" 
               type="text" 
               defaultValue="Oct 24, 2023 - Oct 25, 2023"
             />
-            <span className="material-symbols-outlined text-text-secondary text-[16px]">expand_more</span>
+            <Icon name="expand_more" className="text-text-secondary" size={16} />
           </div>
 
           {/* Status Filter */}

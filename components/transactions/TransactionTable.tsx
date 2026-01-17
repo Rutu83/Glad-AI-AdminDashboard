@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Icon from '../Icon'
 
 interface Transaction {
   id: string
@@ -103,7 +104,7 @@ function getTypeBadge(type: Transaction['type']) {
   if (type === 'voice') {
     return (
       <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-400 text-xs font-medium border border-blue-500/20 font-display">
-        <span className="material-symbols-outlined text-[14px]">graphic_eq</span>
+        <Icon name="graphic_eq" className="text-[14px]" />
         Voice
       </span>
     )
@@ -111,7 +112,7 @@ function getTypeBadge(type: Transaction['type']) {
   
   return (
     <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-gray-700/30 text-gray-300 text-xs font-medium border border-gray-600/30 font-display">
-      <span className="material-symbols-outlined text-[14px]">touch_app</span>
+      <Icon name="touch_app" className="text-[14px]" />
       Manual
     </span>
   )
@@ -210,7 +211,7 @@ export default function TransactionTable() {
                 </td>
                 <td className="py-4 px-6 text-right">
                   <button className="text-text-secondary hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="material-symbols-outlined text-[20px]">more_vert</span>
+                    <Icon name="more_vert" className="text-[20px]" />
                   </button>
                 </td>
               </tr>

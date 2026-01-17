@@ -1,3 +1,5 @@
+import Icon from '../Icon'
+
 export default function RevenueHeader() {
   return (
     <header className="flex-shrink-0 w-full bg-background-dark/95 backdrop-blur-md z-10 border-b border-white/5 sticky top-0">
@@ -9,12 +11,12 @@ export default function RevenueHeader() {
           </div>
           <div className="flex items-center gap-3">
             <button className="flex items-center gap-2 px-4 py-2 bg-card-dark border border-white/10 rounded-lg text-sm font-medium text-white hover:bg-white/5 transition-colors">
-              <span className="material-symbols-outlined text-[18px]">calendar_today</span>
+              <Icon name="calendar_today" className="text-[18px]" />
               Last 30 Days
-              <span className="material-symbols-outlined text-[18px]">expand_more</span>
+              <Icon name="expand_more" className="text-[18px]" />
             </button>
             <button className="flex items-center justify-center size-10 bg-primary rounded-lg text-white shadow-lg shadow-primary/30 hover:bg-primary/90 transition-colors">
-              <span className="material-symbols-outlined">download</span>
+              <Icon name="download" />
             </button>
           </div>
         </div>

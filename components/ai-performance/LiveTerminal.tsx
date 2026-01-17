@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Icon from '../Icon'
 
 interface LogEntry {
   timestamp: string
@@ -65,7 +66,7 @@ export default function LiveTerminal() {
     <div className="flex flex-col rounded-2xl border border-border-dark bg-[#0d0a12] shadow-xl overflow-hidden">
       <div className="flex items-center justify-between border-b border-[#302839] bg-[#141118] px-4 py-3">
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-primary animate-pulse text-base">terminal</span>
+          <Icon name="terminal" className="text-primary animate-pulse text-base" />
           <h3 className="text-sm font-bold text-white tracking-wide uppercase">Live API Stream</h3>
         </div>
         <div className="flex gap-1.5">

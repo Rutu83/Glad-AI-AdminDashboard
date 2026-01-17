@@ -1,3 +1,5 @@
+import Icon from '../Icon'
+
 interface MetricCardProps {
   title: string
   value: string
@@ -11,7 +13,7 @@ function MetricCard({ title, value, change, changeType, icon, iconColor }: Metri
   return (
     <div className="flex flex-col gap-3 rounded-2xl p-6 bg-card-dark border border-white/5 shadow-xl relative overflow-hidden group">
       <div className={`absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity`}>
-        <span className={`material-symbols-outlined text-6xl ${iconColor.split(' ')[1]}`}>{icon}</span>
+        <Icon name={icon} className={`text-6xl ${iconColor.split(' ')[1]}`} />
       </div>
       <p className="text-text-secondary text-sm font-medium z-10">{title}</p>
       <div className="flex items-baseline gap-2 z-10">
@@ -19,9 +21,10 @@ function MetricCard({ title, value, change, changeType, icon, iconColor }: Metri
       </div>
       <div className="flex items-center gap-1.5 z-10">
         <div className={`${changeType === 'positive' ? 'bg-emerald-500/20' : 'bg-red-500/20'} rounded-full p-0.5`}>
-          <span className={`material-symbols-outlined ${changeType === 'positive' ? 'text-emerald-400' : 'text-red-400'} text-sm`}>
-            {changeType === 'positive' ? 'trending_up' : 'trending_down'}
-          </span>
+          <Icon 
+            name={changeType === 'positive' ? 'trending_up' : 'trending_down'} 
+            className={`${changeType === 'positive' ? 'text-emerald-400' : 'text-red-400'} text-sm`} 
+          />
         </div>
         <p className={`${changeType === 'positive' ? 'text-emerald-400' : 'text-red-400'} text-sm font-medium`}>{change}</p>
         <span className="text-text-secondary text-xs">vs last month</span>

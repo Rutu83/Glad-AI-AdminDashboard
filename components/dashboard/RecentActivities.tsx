@@ -1,3 +1,5 @@
+import Icon from '../Icon'
+
 interface Activity {
   id: string
   type: string
@@ -83,7 +85,7 @@ export default function RecentActivities() {
               <tr key={activity.id} className="hover:bg-white/5 transition-colors">
                 <td className="px-6 py-4 flex items-center gap-3">
                   <div className={`h-8 w-8 rounded ${activity.iconColor} flex items-center justify-center`}>
-                    <span className="material-symbols-outlined text-[18px]">{activity.icon}</span>
+                    <Icon name={activity.icon} size={18} />
                   </div>
                   <span className="text-white font-medium">{activity.type}</span>
                 </td>

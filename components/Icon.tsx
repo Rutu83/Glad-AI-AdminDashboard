@@ -59,7 +59,8 @@ import {
   MdVisibilityOff,
   MdMenu,
   MdClose,
-  MdRemove
+  MdRemove,
+  MdCalendarMonth
 } from 'react-icons/md'
 
 interface IconProps {
@@ -90,6 +91,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   'chevron_right': MdChevronRight,
   'chevron_left': MdChevronLeft,
   'calendar_today': MdCalendarToday,
+  'calendar_month': MdCalendarMonth,
   'download': MdDownload,
   'send': MdSend,
   'edit_square': MdEditSquare,
