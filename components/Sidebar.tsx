@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Icon from './Icon'
+import { useAuth } from '@/contexts/AuthContext'
 
 interface NavItem {
   name: string
@@ -28,7 +29,14 @@ const systemNavItems: NavItem[] = [
 
 export default function Sidebar() {
   const pathname = usePathname()
+  const router = useRouter()
+  const { adminUser, signOut } = useAuth()
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+
+  const handleLogout = async () => {
+    await signOut()
+    router.replace('/login')
+  }
 
   const isActive = (href: string) => {
     if (href === '/') {
@@ -41,12 +49,12 @@ export default function Sidebar() {
     <>
       {/* Mobile backdrop */}
       {isMobileOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 md:hidden"
           onClick={() => setIsMobileOpen(false)}
         />
       )}
-      
+
       {/* Sidebar */}
       <aside className={`
         fixed md:static inset-y-0 left-0 z-50
@@ -124,21 +132,25 @@ export default function Sidebar() {
         <div className="p-4 border-t border-white/5">
           <div className="flex items-center justify-between gap-3 p-3 rounded-xl bg-white/5 border border-white/5">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 flex items-center justify-center overflow-hidden border border-white/10">
-                <Image
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAceTuIQPk3GZUvjJVguGB5Y-PY-HNtwUsMy8-IMpnRZHNy1sVP2zr7vZDITrkQi3qXk_A1Xd0XOhoqd84kKQ-jrj6FX2lwSfQoUXfTdssaY5ozkFU1pymenajdXtLNiqgwEtGab6OE2JCS4bT2At_-CC7TsIDT795iu7zSw2e6NQzLTJklTKJQJwmnzezaf-njGjln8J0SDNVZp9uwxcOstZNtiiLMWGzlV7-6GnbbLe2-xb7ERBC1X4TtbIvwf20cQgSIJF3oVN-E"
-                  alt="Alex Morgan"
-                  width={40}
-                  height={40}
-                  className="h-full w-full object-cover rounded-full"
-                />
+              <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-primary/30 to-purple-900/30 flex items-center justify-center overflow-hidden border border-white/10">
+                {adminUser?.avatar_url ? (
+                  <Image
+                    src={adminUser.avatar_url}
+                    alt={adminUser.name}
+                    width={40}
+                    height={40}
+                    className="h-full w-full object-cover rounded-full"
+                  />
+                ) : (
+                  <Icon name="person" className="text-primary" size={22} />
+                )}
               </div>
               <div className="flex flex-col">
-                <p className="text-sm font-semibold text-white">Alex Morgan</p>
-                <p className="text-xs text-gray-400">Admin</p>
+                <p className="text-sm font-semibold text-white">{adminUser?.name || 'Admin'}</p>
+                <p className="text-xs text-gray-400 truncate max-w-[120px]">{adminUser?.email || 'admin'}</p>
               </div>
             </div>
-            <button className="text-gray-400 hover:text-red-400 transition-colors">
+            <button onClick={handleLogout} className="text-gray-400 hover:text-red-400 transition-colors" title="Logout">
               <Icon name="logout" size={20} />
             </button>
           </div>
@@ -148,7 +160,7 @@ export default function Sidebar() {
       {/* Mobile menu button */}
       <button
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-sidebar-dark border border-white/10 text-white"
+        className="md:hidden fixed top-3 left-4 z-[60] p-2 rounded-lg bg-sidebar-dark border border-white/10 text-white shadow-lg"
       >
         <Icon name="menu" />
       </button>

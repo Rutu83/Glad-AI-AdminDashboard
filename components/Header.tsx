@@ -9,14 +9,14 @@ interface HeaderProps {
 
 export default function Header({ title, subtitle }: HeaderProps) {
   return (
-    <header className="flex-none h-20 px-8 flex items-center justify-between border-b border-white/5 bg-background-dark/50 backdrop-blur-sm z-10">
-      <div className="flex items-center gap-4">
-        <h2 className="text-2xl font-bold text-white tracking-tight">{title}</h2>
+    <header className="flex-none h-16 md:h-20 px-4 pl-14 md:pl-8 md:px-8 flex items-center justify-between border-b border-white/5 bg-background-dark/50 backdrop-blur-sm z-10">
+      <div className="flex items-center gap-4 min-w-0">
+        <h2 className="text-lg md:text-2xl font-bold text-white tracking-tight truncate">{title}</h2>
         {subtitle && (
           <span className="text-sm text-gray-400 hidden sm:block">• {subtitle}</span>
         )}
       </div>
-      
+
       <div className="flex items-center gap-6">
         {/* Search Bar */}
         <div className="relative hidden sm:block">

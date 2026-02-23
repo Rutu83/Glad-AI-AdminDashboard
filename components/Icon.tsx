@@ -1,4 +1,4 @@
-import { 
+import {
   MdDashboard,
   MdGroup,
   MdReceipt,
@@ -57,10 +57,15 @@ import {
   MdTune,
   MdSecurity,
   MdVisibilityOff,
+  MdVisibility,
   MdMenu,
   MdClose,
   MdRemove,
-  MdCalendarMonth
+  MdCalendarMonth,
+  MdMail,
+  MdLock,
+  MdError,
+  MdPerson
 } from 'react-icons/md'
 
 interface IconProps {
@@ -82,7 +87,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   'logout': MdLogout,
   'menu': MdMenu,
   'close': MdClose,
-  
+
   // Actions
   'search': MdSearch,
   'expand_more': MdExpandMore,
@@ -97,7 +102,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   'edit_square': MdEditSquare,
   'add_photo_alternate': MdAddPhotoAlternate,
   'info': MdInfo,
-  
+
   // Status & Trends
   'trending_up': MdTrendingUp,
   'trending_down': MdTrendingDown,
@@ -105,7 +110,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   'warning': MdWarning,
   'bolt': MdBolt,
   'remove': MdRemove,
-  
+
   // Finance & Business
   'attach_money': MdAttachMoney,
   'credit_card': MdCreditCard,
@@ -115,7 +120,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   'person_remove': MdPersonRemove,
   'diamond': MdDiamond,
   'apartment': MdApartment,
-  
+
   // Technology
   'dns': MdDns,
   'graphic_eq': MdGraphicEq,
@@ -127,7 +132,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   'tune': MdTune,
   'security': MdSecurity,
   'visibility_off': MdVisibilityOff,
-  
+
   // Communication
   'confirmation_number': MdConfirmationNumber,
   'login': MdLogin,
@@ -135,7 +140,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   'rocket': MdRocket,
   'celebration': MdCelebration,
   'schedule': MdSchedule,
-  
+
   // Utilities
   'more_horiz': MdMoreHoriz,
   'help': MdHelp,
@@ -145,15 +150,22 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   'signal_cellular_alt': MdSignalCellularAlt,
   'wifi': MdWifi,
   'battery_full': MdBatteryFull,
+
+  // Login page icons
+  'visibility': MdVisibility,
+  'mail': MdMail,
+  'lock': MdLock,
+  'error': MdError,
+  'person': MdPerson,
 }
 
 export default function Icon({ name, className = '', size }: IconProps) {
   const IconComponent = iconMap[name]
-  
+
   if (!IconComponent) {
     console.warn(`Icon "${name}" not found in iconMap`)
     return <span className={`inline-block ${className}`} style={{ width: size, height: size }}>?</span>
   }
-  
+
   return <IconComponent className={className} size={size} />
 }

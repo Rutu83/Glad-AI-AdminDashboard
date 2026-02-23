@@ -1,8 +1,42 @@
 'use client'
 
 import Icon from '../Icon'
+import { useState, useEffect } from 'react'
 
-export default function UserFilters() {
+interface UserFiltersProps {
+  searchQuery: string
+  onSearchChange: (query: string) => void
+  statusFilter: string
+  onStatusChange: (status: string) => void
+  planFilter: string
+  onPlanChange: (plan: string) => void
+}
+
+export default function UserFilters({
+  searchQuery,
+  onSearchChange,
+  statusFilter,
+  onStatusChange,
+  planFilter,
+  onPlanChange
+}: UserFiltersProps) {
+  // Local state for the input to allow immediate typing
+  const [localSearch, setLocalSearch] = useState(searchQuery)
+
+  // Debounce the local search state to update the parent's search query
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onSearchChange(localSearch)
+    }, 300) // 300ms debounce delay
+
+    return () => clearTimeout(timer)
+  }, [localSearch, onSearchChange])
+
+  // Sync if parent changes it externally
+  useEffect(() => {
+    setLocalSearch(searchQuery)
+  }, [searchQuery])
+
   return (
     <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-end bg-card-dark/50 p-4 rounded-xl border border-border-dark backdrop-blur-sm">
       {/* Search */}
@@ -12,10 +46,12 @@ export default function UserFilters() {
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <Icon name="search" className="text-gray-400 group-focus-within:text-primary transition-colors" />
           </div>
-          <input 
-            className="block w-full pl-10 pr-3 py-2.5 bg-[#141118] border border-border-dark rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm" 
-            placeholder="Search by name, email, or ID..." 
+          <input
+            className="block w-full pl-10 pr-3 py-2.5 bg-[#141118] border border-border-dark rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm"
+            placeholder="Search by name or ID..."
             type="text"
+            value={localSearch}
+            onChange={(e) => setLocalSearch(e.target.value)}
           />
         </div>
       </div>
@@ -26,7 +62,11 @@ export default function UserFilters() {
         <div className="w-full sm:w-40">
           <label className="block text-xs font-medium text-gray-400 mb-1.5 ml-1">Status</label>
           <div className="relative">
-            <select className="block w-full pl-3 pr-10 py-2.5 bg-[#141118] border border-border-dark rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none text-sm">
+            <select
+              value={statusFilter}
+              onChange={(e) => onStatusChange(e.target.value)}
+              className="block w-full pl-3 pr-10 py-2.5 bg-[#141118] border border-border-dark rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none text-sm"
+            >
               <option value="all">All Status</option>
               <option value="active">Active</option>
               <option value="banned">Banned</option>
@@ -42,7 +82,11 @@ export default function UserFilters() {
         <div className="w-full sm:w-40">
           <label className="block text-xs font-medium text-gray-400 mb-1.5 ml-1">Plan</label>
           <div className="relative">
-            <select className="block w-full pl-3 pr-10 py-2.5 bg-[#141118] border border-border-dark rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none text-sm">
+            <select
+              value={planFilter}
+              onChange={(e) => onPlanChange(e.target.value)}
+              className="block w-full pl-3 pr-10 py-2.5 bg-[#141118] border border-border-dark rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none text-sm"
+            >
               <option value="all">All Plans</option>
               <option value="free">Free Tier</option>
               <option value="pro">Pro Plan</option>

@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import Image from 'next/image'
 import Icon from '../Icon'
 
-interface Transaction {
+export interface Transaction {
+  // ... keep interface ...
   id: string
   timestamp: string
   transactionId: string
@@ -17,88 +19,26 @@ interface Transaction {
   status: 'success' | 'pending' | 'failed'
 }
 
-const transactions: Transaction[] = [
-  {
-    id: '1',
-    timestamp: 'Oct 24, 14:02:45',
-    transactionId: 'TXN-8842-AF',
-    user: {
-      name: 'Sarah Jenkins',
-      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCq_WH8BpHP0ivCkEnM9ciEJxT0lBf6cNxylLBaK2Fw3SqMjJtFQh3YWmlLr5yw4pttany3wuo-d1j7CWKsqE5jzWbftPvt6XHdTdeRnv31AMGg8QENoKcPNfdtFSt0f8s6Br2Ln-Sc1SuyBD0qurkFfcYq4olCwiffQ4ekED1K7XbZPH98_7LVMJ0kS5hzeHTluJ_3GyxGa4Hq-aEdlzXomlAcNOsX5h-o-PX1eHYvJvCWHJP_NiW3o8NlNaaycEjtV7Wk9KRS8HJR'
-    },
-    type: 'voice',
-    amount: '$45.00',
-    category: 'Subscription',
-    status: 'success'
-  },
-  {
-    id: '2',
-    timestamp: 'Oct 24, 14:01:12',
-    transactionId: 'TXN-8841-BB',
-    user: {
-      name: 'Michael Chen',
-      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAy8nhGWKxu4QIPfjh7T4F3-W6g4M8bSvRUkwW7uCp6-ihaDGEWUoV6ObHCGt7syna4D-misr8uMTQ_ASgG-Oj5sR4U4sfJdhjedeCgGv6RVE2OkDoxucjXuhpjOBi8MbgBHMXL5cl-GjBcwljk2feOj8Bqyu4QadY7pms2deckNP9-0KMFbrkeJ4UJBNDjwZx7MspJaaoqvJ04QgIaq0oyX2jzQt8vIgbJAEQic7giDxQcIVgfE-OjU_hEEGeK1u6OFIpQC-bsVc08'
-    },
-    type: 'manual',
-    amount: '$120.50',
-    category: 'API Usage',
-    status: 'pending'
-  },
-  {
-    id: '3',
-    timestamp: 'Oct 24, 13:58:33',
-    transactionId: 'TXN-8840-XQ',
-    user: {
-      name: 'Elena Kovacs',
-      initials: 'EK',
-      bgColor: 'bg-gradient-to-br from-indigo-500 to-purple-600'
-    },
-    type: 'voice',
-    amount: '$9.99',
-    category: 'Micro-txn',
-    status: 'failed'
-  },
-  {
-    id: '4',
-    timestamp: 'Oct 24, 13:55:01',
-    transactionId: 'TXN-8839-PL',
-    user: {
-      name: 'Robert Fox',
-      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCnPfIpt-YHBygdQCQp3sO-6kvCVQgth--VYVZ5BjaJmE73yhMLgP46jT4b1-csR1u47fcBRFmhxlxZOErenR_cCERtZUf0qo3_Q22r-28e1Xx5HTTJWm18E9Qr-kY5b9kdUMIE4adLai3rGII6SZ2l0PA5Srus3aOnovW-Ya6acGwD1xKmn_JQGLgMJ1RPdhkhMsGfdxOHbgYQrA662cdfIxG9ccJKQXJ2EA5CNeXZjWPfNp-rRm-MX1ohS51mmxm7lKfPFcpRD535'
-    },
-    type: 'manual',
-    amount: '$299.00',
-    category: 'Enterprise',
-    status: 'success'
-  },
-  {
-    id: '5',
-    timestamp: 'Oct 24, 13:48:19',
-    transactionId: 'TXN-8838-MN',
-    user: {
-      name: 'Jenny Lane',
-      initials: 'JL',
-      bgColor: 'bg-gradient-to-tr from-pink-500 to-orange-500'
-    },
-    type: 'voice',
-    amount: '$45.00',
-    category: 'Subscription',
-    status: 'success'
-  },
-  {
-    id: '6',
-    timestamp: 'Oct 24, 13:42:05',
-    transactionId: 'TXN-8837-AZ',
-    user: {
-      name: 'Albert Flores',
-      avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC5qveKpipQC_7g6I_QuBpxy3vGhgIu0JdxN249XjeZ1bHw8fwMjIOYZfEUxbdiF0OZfFgg2nG38GLTHwOMKpdZ0HNzS0gpmw1zgIkijmVd78X9jFCBzOLM0JKGResnpjilieslwTAdhP_kt4hJnZoZ57VzIMCq48TOIitX7LBeiEge5g9xlrtFbIwTqqKGo0h9GO22aB-N82vptRYX_pgxQkkDJP3a5NqM58DxVRqDkpnyvE7ARuBCBvyUnlQ8Mn2k70rGLamyT-8_'
-    },
-    type: 'manual',
-    amount: '$850.00',
-    category: 'Bulk Purchase',
-    status: 'success'
+interface TransactionTableProps {
+  transactions: Transaction[]
+}
+
+// Generate a consistent gradient color from a name string
+function getInitialsColor(name: string): string {
+  const gradients = [
+    'bg-gradient-to-br from-indigo-500 to-purple-600',
+    'bg-gradient-to-tr from-pink-500 to-orange-500',
+    'bg-gradient-to-br from-emerald-500 to-teal-600',
+    'bg-gradient-to-tr from-blue-500 to-cyan-500',
+    'bg-gradient-to-br from-amber-500 to-red-500',
+    'bg-gradient-to-tr from-violet-500 to-fuchsia-500',
+  ]
+  let hash = 0
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash)
   }
-]
+  return gradients[Math.abs(hash) % gradients.length]
+}
 
 function getTypeBadge(type: Transaction['type']) {
   if (type === 'voice') {
@@ -109,7 +49,7 @@ function getTypeBadge(type: Transaction['type']) {
       </span>
     )
   }
-  
+
   return (
     <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-gray-700/30 text-gray-300 text-xs font-medium border border-gray-600/30 font-display">
       <Icon name="touch_app" className="text-[14px]" />
@@ -145,93 +85,137 @@ function getStatusBadge(status: Transaction['status']) {
   )
 }
 
-export default function TransactionTable() {
+export default function TransactionTable({ transactions }: TransactionTableProps) {
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 10
+
+  const totalItems = transactions.length
+  const totalPages = Math.ceil(totalItems / itemsPerPage)
+
+  // Calculate index ranges
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = Math.min(startIndex + itemsPerPage, totalItems)
+  const currentTransactions = transactions.slice(startIndex, startIndex + itemsPerPage)
+
+  const handlePrevPage = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 1))
+  }
+
+  const handleNextPage = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+  }
+
   return (
-    <div className="flex-1 overflow-auto px-8 pb-8 z-10">
-      <div className="bg-card-dark border border-border-dark rounded-xl shadow-xl overflow-hidden min-w-[800px]">
-        <table className="w-full text-left border-collapse">
-          <thead className="bg-black/40 sticky top-0 z-10 backdrop-blur-md">
-            <tr>
-              <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark w-[160px]">
-                Timestamp
-              </th>
-              <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark">
-                Transaction ID
-              </th>
-              <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark">
-                User
-              </th>
-              <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark">
-                Type
-              </th>
-              <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark">
-                Amount
-              </th>
-              <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark">
-                Category
-              </th>
-              <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark">
-                Status
-              </th>
-              <th className="py-4 px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark w-10"></th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-border-dark font-mono text-sm">
-            {transactions.map((transaction) => (
-              <tr key={transaction.id} className="hover:bg-white/5 transition-colors group">
-                <td className="py-4 px-6 text-text-secondary">{transaction.timestamp}</td>
-                <td className="py-4 px-6 text-primary font-medium tracking-wide">{transaction.transactionId}</td>
-                <td className="py-4 px-6 font-display">
-                  <div className="flex items-center gap-3">
-                    <div className="size-8 rounded-full bg-gray-700 bg-cover bg-center overflow-hidden">
-                      {transaction.user.avatar ? (
-                        <Image
-                          src={transaction.user.avatar}
-                          alt={`Avatar of ${transaction.user.name}`}
-                          width={32}
-                          height={32}
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        <div className={`size-8 rounded-full flex items-center justify-center text-xs font-bold text-white ${transaction.user.bgColor}`}>
-                          {transaction.user.initials}
-                        </div>
-                      )}
-                    </div>
-                    <span className="text-white font-medium">{transaction.user.name}</span>
-                  </div>
-                </td>
-                <td className="py-4 px-6">
-                  {getTypeBadge(transaction.type)}
-                </td>
-                <td className="py-4 px-6 text-white font-bold tracking-wide">{transaction.amount}</td>
-                <td className="py-4 px-6 text-text-secondary font-display">{transaction.category}</td>
-                <td className="py-4 px-6 font-display">
-                  {getStatusBadge(transaction.status)}
-                </td>
-                <td className="py-4 px-6 text-right">
-                  <button className="text-text-secondary hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Icon name="more_vert" className="text-[20px]" />
-                  </button>
-                </td>
+    <div className="flex-1 overflow-auto px-4 md:px-8 pb-8 z-10">
+      <div className="bg-card-dark border border-border-dark rounded-xl shadow-xl overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse min-w-[600px]">
+            <thead className="bg-black/40 sticky top-0 z-10 backdrop-blur-md">
+              <tr>
+                <th className="py-3 md:py-4 px-4 md:px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark w-[140px]">
+                  Timestamp
+                </th>
+                <th className="py-3 md:py-4 px-4 md:px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark">
+                  Transaction ID
+                </th>
+                <th className="py-3 md:py-4 px-4 md:px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark">
+                  User
+                </th>
+                <th className="py-3 md:py-4 px-4 md:px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark hidden sm:table-cell">
+                  Type
+                </th>
+                <th className="py-3 md:py-4 px-4 md:px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark">
+                  Amount
+                </th>
+                <th className="py-3 md:py-4 px-4 md:px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark hidden md:table-cell">
+                  Category
+                </th>
+                <th className="py-3 md:py-4 px-4 md:px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark">
+                  Status
+                </th>
+                <th className="py-3 md:py-4 px-4 md:px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark w-10"></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-border-dark font-mono text-sm">
+              {currentTransactions.length === 0 ? (
+                <tr>
+                  <td colSpan={8} className="py-12 text-center text-text-secondary font-display">
+                    <Icon name="receipt_long" className="text-[40px] mb-2 block mx-auto opacity-40" />
+                    No transactions found
+                  </td>
+                </tr>
+              ) : (
+                currentTransactions.map((transaction) => (
+                  <tr key={transaction.id} className="hover:bg-white/5 transition-colors group">
+                    <td className="py-3 md:py-4 px-4 md:px-6 text-text-secondary">{transaction.timestamp}</td>
+                    <td className="py-3 md:py-4 px-4 md:px-6 text-primary font-medium tracking-wide">{transaction.transactionId}</td>
+                    <td className="py-3 md:py-4 px-4 md:px-6 font-display">
+                      <div className="flex items-center gap-3">
+                        <div className="size-8 rounded-full bg-gray-700 bg-cover bg-center overflow-hidden flex-shrink-0">
+                          {transaction.user.avatar ? (
+                            <Image
+                              src={transaction.user.avatar}
+                              alt={`Avatar of ${transaction.user.name}`}
+                              width={32}
+                              height={32}
+                              className="h-full w-full object-cover"
+                            />
+                          ) : (
+                            <div className={`size-8 rounded-full flex items-center justify-center text-xs font-bold text-white ${transaction.user.bgColor || getInitialsColor(transaction.user.name)}`}>
+                              {transaction.user.initials || transaction.user.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2)}
+                            </div>
+                          )}
+                        </div>
+                        <span className="text-white font-medium truncate max-w-[120px]">{transaction.user.name}</span>
+                      </div>
+                    </td>
+                    <td className="py-3 md:py-4 px-4 md:px-6 hidden sm:table-cell">
+                      {getTypeBadge(transaction.type)}
+                    </td>
+                    <td className="py-3 md:py-4 px-4 md:px-6 text-white font-bold tracking-wide">{transaction.amount}</td>
+                    <td className="py-3 md:py-4 px-4 md:px-6 text-text-secondary font-display hidden md:table-cell">{transaction.category}</td>
+                    <td className="py-3 md:py-4 px-4 md:px-6 font-display">
+                      {getStatusBadge(transaction.status)}
+                    </td>
+                    <td className="py-3 md:py-4 px-4 md:px-6 text-right">
+                      <button className="text-text-secondary hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Icon name="more_vert" className="text-[20px]" />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
 
         {/* Pagination / Footer of table */}
-        <div className="flex items-center justify-between px-6 py-4 bg-black/20 border-t border-border-dark">
+        <div className="flex flex-col sm:flex-row items-center justify-between px-4 md:px-6 py-4 bg-black/20 border-t border-border-dark gap-3">
           <p className="text-xs text-text-secondary">
-            Showing <span className="text-white font-medium">1-6</span> of <span className="text-white font-medium">1,248</span> transactions
+            {totalItems > 0 ? (
+              <>Showing <span className="text-white font-medium">{startIndex + 1}-{endIndex}</span> of <span className="text-white font-medium">{totalItems}</span> transactions</>
+            ) : (
+              'No transactions'
+            )}
           </p>
-          <div className="flex gap-2">
-            <button className="px-3 py-1.5 rounded-md border border-border-dark text-xs text-text-secondary hover:bg-white/5 hover:text-white disabled:opacity-50 transition-colors">
-              Previous
-            </button>
-            <button className="px-3 py-1.5 rounded-md border border-border-dark text-xs text-white bg-primary hover:bg-primary/90 transition-colors">
-              Next
-            </button>
-          </div>
+          {totalPages > 1 && (
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handlePrevPage}
+                disabled={currentPage === 1}
+                className="px-3 py-1.5 rounded-md border border-border-dark text-xs text-text-secondary hover:bg-white/5 hover:text-white disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
+              >
+                Previous
+              </button>
+              <button
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1.5 rounded-md border border-border-dark text-xs text-white bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:hover:bg-primary transition-colors"
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

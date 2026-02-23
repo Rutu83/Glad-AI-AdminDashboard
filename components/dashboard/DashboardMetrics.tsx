@@ -23,9 +23,9 @@ function MetricCard({ title, value, change, changeType, icon, iconColor }: Metri
           <Icon name={icon} />
         </div>
         <span className={`flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full border ${changeColors[changeType]}`}>
-          <Icon 
-            name={changeType === 'positive' ? 'trending_up' : changeType === 'negative' ? 'trending_down' : 'remove'} 
-            size={14} 
+          <Icon
+            name={changeType === 'positive' ? 'trending_up' : changeType === 'negative' ? 'trending_down' : 'remove'}
+            size={14}
           />
           {change}
         </span>
@@ -55,27 +55,11 @@ export default function DashboardMetrics() {
       changeType: 'positive' as const,
       icon: 'attach_money',
       iconColor: 'bg-accent-cyan/10 text-accent-cyan'
-    },
-    {
-      title: 'AI Server Load',
-      value: '42%',
-      change: 'Normal',
-      changeType: 'neutral' as const,
-      icon: 'dns',
-      iconColor: 'bg-purple-500/10 text-purple-400'
-    },
-    {
-      title: 'Pending Tickets',
-      value: '18',
-      change: 'Needs Action',
-      changeType: 'negative' as const,
-      icon: 'confirmation_number',
-      iconColor: 'bg-orange-500/10 text-orange-400'
     }
   ]
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6">
       {metrics.map((metric, index) => (
         <MetricCard key={index} {...metric} />
       ))}

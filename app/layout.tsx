@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import NotificationManager from '@/components/NotificationManager'
+import { AuthProvider } from '@/contexts/AuthContext'
+import ClientLayout from '@/components/ClientLayout'
+
 
 export const metadata: Metadata = {
   title: 'GLAD AI - Admin Panel',
@@ -14,7 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased overflow-hidden selection:bg-primary selection:text-white">
-        {children}
+        <AuthProvider>
+          <NotificationManager />
+          <ClientLayout>
+            {children}
+          </ClientLayout>
+        </AuthProvider>
       </body>
     </html>
   )

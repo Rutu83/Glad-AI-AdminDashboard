@@ -25,5 +25,8 @@ dist-ssr
 .vercel
 vercel.json
 .env
-/api
 .next/
+
+# Firebase
+*firebase-adminsdk*.json
+.firebase/
